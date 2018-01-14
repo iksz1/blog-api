@@ -39,22 +39,14 @@ class AuthServiceProvider extends ServiceProvider
         Gate::policy(Category::class, CategoryPolicy::class);
         Gate::policy(Comment::class, CommentPolicy::class);        
 
-        // Gate::define('show-post', function ($user, $post) {
-        //     // return $user->id === $post->user_id;
-        //     return $post->author->name === 'vasya';
-        // });
-
         $this->app['auth']->viaRequest('api', function ($request) {
             $token = $request->bearerToken();
-            // dd($request->headers);
             if ($token) {
                 $jwt = \explode('.', $token);
                 if (\count($jwt) === 3) {
                     $signature = \base64_encode(\hash_hmac('sha256', $jwt[0] . '.' . $jwt[1], env('JWT_KEY'), true));
-                    // dd($signature);
                     if (\hash_equals($signature, $jwt[2])) {
                         $data = \json_decode(\base64_decode($jwt[1], true));
-                        // dd($data);
                         if ($data) {
                             return User::where('name', $data->name)->first();
                         }

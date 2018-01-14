@@ -1,15 +1,10 @@
 <?php
-
-// use Illuminate\Http\Request;
-
 // Event::listen('Illuminate\Database\Events\QueryExecuted', function ($query) {
 //     // var_dump($query);
 //     var_dump($query->sql); // Dumps sql
 //     // var_dump($query->bindings); //Dumps data passed to query
 //     var_dump($query->time); //Dumps time sql took to be processed
 //  });
-
-// ("SELECT posts.*, users.name FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id = $id");
 
 $router->post('login', 'AuthController@login');
 $router->post('register', 'AuthController@register');
@@ -55,7 +50,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 });
 
-// $router->get('/{any:.*}', function () use ($router) {
-//     // return $router->app->version();
-//     return view('base');
-// });
+$router->get('/', function () use ($router) {
+    return $router->app->version();
+});

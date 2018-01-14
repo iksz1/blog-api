@@ -17,7 +17,6 @@ class PostResource extends Resource
         return [
             'id' => $this->id,
             'title' => htmlspecialchars($this->title),
-            // 'teaser' => $this->teaser,
             'body' => htmlspecialchars($this->body),
             'author' => new UserResource($this->user),
             'category' => new CategoryResource($this->category),

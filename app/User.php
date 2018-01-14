@@ -39,18 +39,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return false;
     }
 
-    public function generateApiToken() {
-        $this->api_token = \str_random(60);
-        $this->save();
-        return $this->api_token;
-    }
-
-    public function destroyApiToken() {
-        $this->api_token = null;
-        $this->save(); //check if saves null
-        return true;
-    }
-
     public function posts() {
         return $this->hasMany(Post::class);
     }
