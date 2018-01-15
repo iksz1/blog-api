@@ -51,5 +51,5 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 });
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return 'new day new challenge...';
 });
