@@ -28,22 +28,23 @@ class CommentsController extends Controller
         //
     }
 
-    public function index() {
+    public function index()
+    {
         // return CommentResource::collection(Comment::with('author', 'category')->orderBy('id', 'desc')->simplePaginate(5));
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $id = (int) $id;
         $cmt = Comment::find($id);
         if ($cmt) {
             return response()->json(new CommentResource($cmt));
         }
         return response()->json('not found', 404);
-        // $cmts = DB::table('Comments')->join('users', 'Comments.user_id', '=', 'users.id')
-        //     ->join('categories', 'Comments.category_id', '=', 'categories.id')->select('Comments.*', 'users.name as author', 'categories.name as category')->find($id);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // $this->authorize('create', Comment::class);
         $this->validate($request, $this->validRules);
         if ($request->user()) {
@@ -54,7 +55,8 @@ class CommentsController extends Controller
         return response()->json(new CommentResource($cmt));
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $id = (int) $id;
         $cmt = Comment::find($id);
         if (!$cmt) {
@@ -62,13 +64,12 @@ class CommentsController extends Controller
         }
         $this->authorize('update', $cmt);
         $this->validate($request, $this->validRules);
-        // dd($request->all());
         $cmt->update($request->all());
         return response()->json(new CommentResource($cmt));
     }
 
-    public function delete($id) {
-        // increments id?
+    public function delete($id)
+    {
         $this->authorize('delete', Comment::class);        
         $id = (int) $id;
         Comment::destroy($id);

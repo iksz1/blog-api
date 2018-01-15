@@ -30,7 +30,8 @@ class PostsController extends Controller
         //
     }
 
-    public function index() {
+    public function index()
+    {
         // if ($request->has('category')) {
         //     $cat = Category::where('name', $request->category)->first();
         //     return PostResource::collection(Post::where('category_id', $cat->id)
@@ -40,7 +41,8 @@ class PostsController extends Controller
             ->orderBy('id', 'desc')->simplePaginate());
     }
 
-    public function byCategory($cat) {
+    public function byCategory($cat)
+    {
         $cat = Category::where('alias', $cat)->first();
         //querying category 2 times :/
         if ($cat) {
@@ -52,7 +54,8 @@ class PostsController extends Controller
         return response()->json('not found', 404);
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $id = (int) $id;
         $post = Post::withTrashed()->with('comments')->findOrFail($id);
         return response()->json(new PostResource($post));
@@ -60,14 +63,16 @@ class PostsController extends Controller
         //     ->join('categories', 'posts.category_id', '=', 'categories.id')->select('posts.*', 'users.name as author', 'categories.name as category')->find($id);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $this->authorize('create', Post::class);
         $this->validate($request, $this->validRules);
         $post = $request->user()->publish(new Post($request->all()));
         return response()->json(new PostResource($post), 201);
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $id = (int) $id;
         $post = Post::withTrashed()->findOrFail($id);
         $this->authorize('update', $post);
@@ -77,7 +82,8 @@ class PostsController extends Controller
         return response()->json(new PostResource($post));
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         // increments id?
         $id = (int) $id;
         $post = Post::findOrFail($id);
@@ -87,7 +93,8 @@ class PostsController extends Controller
         // Post::destroy($id);
     }
 
-    public function restore($id) {
+    public function restore($id)
+    {
         $id = (int) $id;
         $post = Post::withTrashed()->findOrFail($id);
         $this->authorize('restore', $post);

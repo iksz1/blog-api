@@ -32,26 +32,31 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
-    public function isAdmin() {
+    public function isAdmin()
+    {
         if ($this->role === 'admin') {
             return true;
         }
         return false;
     }
 
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 
-    public function publish(Post $post) {
+    public function publish(Post $post)
+    {
         return $this->posts()->save($post);
     }
 
-    public function writeComment(Comment $cmt) {
+    public function writeComment(Comment $cmt)
+    {
         return $this->comments()->save($cmt);
     }
 }

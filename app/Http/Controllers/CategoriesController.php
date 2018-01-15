@@ -26,23 +26,26 @@ class CategoriesController extends Controller
         //
     }
 
-    public function index() {
-        // return CommentResource::collection(Comment::with('author', 'category')->orderBy('id', 'desc')->simplePaginate(5));
+    public function index()
+    {
         return CategoryResource::collection(Category::all());
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         return response()->json(new CategoryResource(Category::find($id)));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $this->authorize('create', Category::class);
         $this->validate($request, $this->validRules);
         $cat = Category::create($request->all());
         return response()->json(new CategoryResource($cat));
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $id = (int) $id;
         $cat = Category::find($id);
         if (!$cat) {
@@ -50,13 +53,12 @@ class CategoriesController extends Controller
         }
         $this->authorize('update', $cat);
         $this->validate($request, $this->validRules);
-        // dd($request->all());
         $cat->update($request->all());
         return response()->json(new CategoryResource($cat));
     }
 
-    public function delete($id) {
-        // increments id?
+    public function delete($id)
+    {
         $this->authorize('delete', Category::class);        
         $id = (int) $id;
         Category::destroy($id);
