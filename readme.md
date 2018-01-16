@@ -1,6 +1,8 @@
 # Lumen based blogging API
 
-Authorization: JWT token
+Authorization: JWT
+
 CORS: enabled
+
 License: MIT
 

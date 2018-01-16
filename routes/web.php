@@ -51,5 +51,5 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 });
 
 $router->get('/', function () use ($router) {
-    return 'new day new challenge...';
+    return view('welcome');
 });
