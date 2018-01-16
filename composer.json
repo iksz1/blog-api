@@ -1,7 +1,7 @@
 {
-    "name": "laravel/lumen",
-    "description": "The Laravel Lumen Framework.",
-    "keywords": ["framework", "laravel", "lumen"],
+    "name": "Blogging API",
+    "description": "Blogging API",
+    "keywords": ["rest-api", "blog", "lumen"],
     "license": "MIT",
     "type": "project",
     "require": {
