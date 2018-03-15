@@ -48,13 +48,6 @@ class AuthController extends Controller
         return response('registration successful', 200);
     }
 
-    // public function logout(Request $request)
-    // {
-    //     if ($request->user()) {
-    //         //
-    //     }
-    // }
-
     protected function generateToken($user)
     {
         $jwtHeader = base64_encode(json_encode(['alg' => 'HS256', 'typ' => 'JWT']));

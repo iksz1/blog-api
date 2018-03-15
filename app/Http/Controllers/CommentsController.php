@@ -15,7 +15,6 @@ class CommentsController extends Controller
         'parent_id' => 'required|integer',
         'author' => 'required|min:3|max:32|regex:/^[а-яА-ЯёЁ\w]+$/u',
         'content' => 'required|string|max:2048',
-        // 'status' => 'integer'
     ];
 
     /**
@@ -35,7 +34,7 @@ class CommentsController extends Controller
 
     public function show($id)
     {
-        $id = (int) $id;
+        $id = (int)$id;
         $cmt = Comment::find($id);
         if ($cmt) {
             return response()->json(new CommentResource($cmt));
@@ -57,7 +56,7 @@ class CommentsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $id = (int) $id;
+        $id = (int)$id;
         $cmt = Comment::find($id);
         if (!$cmt) {
             return response('not found', 404);
@@ -70,8 +69,8 @@ class CommentsController extends Controller
 
     public function delete($id)
     {
-        $this->authorize('delete', Comment::class);        
-        $id = (int) $id;
+        $this->authorize('delete', Comment::class);
+        $id = (int)$id;
         Comment::destroy($id);
     }
 

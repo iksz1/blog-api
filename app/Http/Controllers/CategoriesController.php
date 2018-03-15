@@ -13,7 +13,6 @@ class CategoriesController extends Controller
     protected $validRules = [
         'alias' => 'required|string|max:32',
         'name' => 'required|string|max:32',
-        // 'status' => 'integer'
     ];
 
     /**
@@ -46,7 +45,7 @@ class CategoriesController extends Controller
 
     public function update(Request $request, $id)
     {
-        $id = (int) $id;
+        $id = (int)$id;
         $cat = Category::find($id);
         if (!$cat) {
             return response()->json('not found', 404);
@@ -59,8 +58,8 @@ class CategoriesController extends Controller
 
     public function delete($id)
     {
-        $this->authorize('delete', Category::class);        
-        $id = (int) $id;
+        $this->authorize('delete', Category::class);
+        $id = (int)$id;
         Category::destroy($id);
     }
 

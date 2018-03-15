@@ -26,11 +26,7 @@ class Category extends Model
         'category_id',
     ];
 
-    public $timestamps = false;    
-
-    // public function getRouteKeyName() {
-    //     return 'name';
-    // }
+    public $timestamps = false;
 
     public function posts()
     {
